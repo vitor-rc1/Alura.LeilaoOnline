@@ -33,7 +33,7 @@ namespace Alura.LeilaoOnline.Tests
                 // Act
                 () => leilao.TerminaPregao()
                 );
-            var msgEsperada = "Não é possivel finalizar o pregão sem ter inicializa-lo";
+            var msgEsperada = "Não é possivel finalizar o pregão sem inicializa-lo";
             Assert.Equal(msgEsperada, exececaoObtida.Message);
             
         }
