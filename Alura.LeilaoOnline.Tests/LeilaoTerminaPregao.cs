@@ -11,7 +11,7 @@ namespace Alura.LeilaoOnline.Tests
         {
             // Arrange
             var leilao = new Leilao("Mona Lisa");
-
+            leilao.IniciaPregao();
             // Act
             leilao.TerminaPregao();
 
@@ -33,10 +33,18 @@ namespace Alura.LeilaoOnline.Tests
             // Arrange
             var leilao = new Leilao("Mona Lisa");
             var tiago = new Interessada("Tiago", leilao);
-            
-            foreach(var valor in ofertas)
+            var maria = new Interessada("Maria", leilao);
+            leilao.IniciaPregao();
+            for (int i = 0; i < ofertas.Length; i++)
             {
-                leilao.RecebeLance(tiago, valor);
+                var valor = ofertas[i];
+                if (i % 2 == 0)
+                {
+                    leilao.RecebeLance(tiago, valor);
+                    continue;
+                }
+
+                leilao.RecebeLance(maria, valor);
             }
 
             // Act

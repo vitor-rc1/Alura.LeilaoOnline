@@ -7,6 +7,27 @@ namespace Alura.LeilaoOnline.Tests
 {
     public class LeilaoRecebeLance
     {
+        [Fact]
+        public void NaoAceitaProximoLanceDadoMesmoCLienteRealizouUltimoLance()
+        {
+            // Arrange
+            var leilao = new Leilao("Mona Lisa");
+            var tiago = new Interessada("Tiago", leilao);
+            leilao.IniciaPregao();
+            leilao.RecebeLance(tiago, 500);
+
+
+            // Act
+            leilao.RecebeLance(tiago, 1000);
+
+            // Assert
+
+            var qtdEsperada = 1;
+            var qtdObtida = leilao.Lances.Count();
+
+            Assert.Equal(qtdEsperada, qtdObtida);
+        }
+
         [Theory]
         [InlineData(4, new double[] { 800, 900, 1000, 1200 })]
         [InlineData(2, new double[] { 800, 900 })]
@@ -18,10 +39,18 @@ namespace Alura.LeilaoOnline.Tests
             // Arrange
             var leilao = new Leilao("Mona Lisa");
             var tiago = new Interessada("Tiago", leilao);
-
-            foreach (var valor in ofertas)
+            var maria = new Interessada("Maria", leilao);
+            leilao.IniciaPregao();
+            for (int i = 0; i < ofertas.Length; i++)
             {
-                leilao.RecebeLance(tiago, valor);
+                var valor = ofertas[i];
+                if (i % 2 == 0)
+                {
+                    leilao.RecebeLance(tiago, valor);
+                    continue;
+                }
+                
+                leilao.RecebeLance(maria, valor);
             }
 
             leilao.TerminaPregao();
