@@ -22,6 +22,22 @@ namespace Alura.LeilaoOnline.Tests
             Assert.Equal(valorEsperado, valorObtido);
         }
 
+        [Fact]
+        public void LancaInvalidOperationExceptionDadoPregaoNaoInciado()
+        {
+            // Arrange
+            var leilao = new Leilao("Mona Lisa");
+            
+            // Assert
+            var exececaoObtida = Assert.Throws<System.InvalidOperationException>(
+                // Act
+                () => leilao.TerminaPregao()
+                );
+            var msgEsperada = "Não é possivel finalizar o pregão sem ter inicializa-lo";
+            Assert.Equal(msgEsperada, exececaoObtida.Message);
+            
+        }
+
         [Theory]
         [InlineData(1200, new double[] { 800, 900, 1000, 1200 })]
         [InlineData(1000, new double[] { 800, 900, 1000, 990 })]
