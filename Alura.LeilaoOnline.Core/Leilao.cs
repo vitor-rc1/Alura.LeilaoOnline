@@ -53,6 +53,7 @@ namespace Alura.LeilaoOnline.Core
             if(Estado != EstadoLeilao.LeilaoEmAndamento)
             {
                 throw new System.InvalidOperationException("Não é possivel finalizar o pregão sem inicializa-lo");
+                System.Console.WriteLine("asa");
             }
 
             Ganhador = _avaliador.Avalia(this);
