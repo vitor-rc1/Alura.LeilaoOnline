@@ -15,6 +15,7 @@ namespace Alura.LeilaoOnline.Core
             }
             Cliente = cliente;
             Valor = valor;
+            Console.WriteLine("Teste");
         }
     }
 }
